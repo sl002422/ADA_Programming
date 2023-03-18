@@ -5,7 +5,8 @@
 #%%
 # Hello world: the print() built-in function and the + operator.
 
-
+print('George Harrison')
+print('George Harrison', 'was born in', 1943, 'in Liverpool' + str(1942))
 
 #%%
 # The input() built-in function
