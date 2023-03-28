@@ -77,10 +77,10 @@ for i, song in enumerate(songs):
 #%%
 # Global variables: __name__, __file__, __doc__,...
 
-print(__name__)
-print(__doc__)
+# print(__name__)
+# print(__doc__)
 # print(__file__)
-print(globals())
+ print(globals()) #globals() is one of the build-in functions, returns the dictionary of all the build-in globals names
 
 #%%
 # Importing from another script

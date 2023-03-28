@@ -1,7 +1,7 @@
 """The very first module in a more structured version of the project.
 """
 
-
+print(__name__)
 #%%
 # Moving code from main.py
 
@@ -52,6 +52,7 @@ def year_of_birth():
     print(id(year))
     return year
 
+# print(year_of_birth())
 #%%
 # Printing docstrings
 
@@ -84,16 +85,23 @@ def year_of_birth():
 
 #%%
 # Taking care of the module __name__
+# print(__name__)
+
+a = 2
+b = 10
+c = a+b
+print(c)
 
 if __name__ == "__main__":
     print()
-    print()
-    print()
-    print()
-    print()
-    print('inception.py')
-    print(__name__)
-    print()
+    print(__name__) # we'll see in the output that the name is main means it is running as main
+#     print()
+#     print()
+#     print()
+#     print()
+#     print('inception.py')
+#     print(__name__)
+    print(year_of_birth())
 
-    print(year_of_birth.__doc__)
+    # print(year_of_birth.__doc__)
 
