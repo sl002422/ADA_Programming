@@ -200,24 +200,57 @@ class Singer(Musician):
         return super().__str__() + v
 
 
+class Band:
+    def __init__(self, name, *members, start=date.today(), end=date.today()):
+
+        band_name_error = not isinstance(name, str) or (len(name) < 2)
+        if band_name_error:
+            raise BandNameError(name)
+
+        self.name = name
+        self.members = members
+        self.start = start
+        self.end = end
+
+    def __str__(self):
+        n = f'{self.name}'
+        n += ': ' if self.members else ' '
+        m = ', '.join([str(m) for m in self.members]) if self.members else ''
+        s = str(self.start.year)
+        e = str(self.end.year)
+        return f'{n}{m} ({s}-{e})'
+
+    def __eq__(self, other):
+        t = isinstance(other, Band)  # we can return it in the end
+        n = self.name == other.name
+        m = all([x in self.members for x in other.members]) and all([x in other.members for x in self.members])
+        s = self.start.year == other.start.year
+        e = self.end.year == other.end.year
+        return t and n and m and s and e
+
+    def __iter__(self):  # this method defines iterator for the class
+        self.__i = 0
+        return self
+
+    def __next__(self):  # next one from iterator
+        if self.__i <= len(self.members):
+            m = self.members[self.__i]
+            self.__i += 1
+            return m
+        else:
+            raise StopIteration
 
 
+class BandError(Exception):
+    pass
+class BandNameError(BandError):
+    def __init__(self, name):
+        Exception.__init__(self, f'BandNameError: \'{name}\' is not a valid band name')
+        self.name = name
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+try:
+    b = Band('a', *[johnLennon, paulMcCartney, georgeHarrison, ringoStarr],
+             start=date(1957, 7, 6), end=date(1970, 4, 11))
+except BandNameError as e:
+    # sys.stderr.write(f'\n{type(e).__name__}: {e.args[0]}')
+    sys.stderr.write(f'\n{e.args[0]}\n\n')
